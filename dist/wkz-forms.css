@@ -1057,6 +1057,7 @@ body.wf-design-mode .hs-form-success {
         max-height: 96dvh;
         border-radius: 16px 16px 0 0;
         overflow: hidden;
+        padding: 0;
         transform: translateY(100%);
         opacity: 1;
         transition: transform 0.36s cubic-bezier(0.32, 0.72, 0, 1);
@@ -1086,13 +1087,13 @@ body.wf-design-mode .hs-form-success {
         height: auto;
         margin: 0;
         padding: 16px;
-        background: var(--hs-bg-input);
+        background: #FFFFFF;
     }
-
 
     .wkz-overlay-body {
         overflow-y: auto;
         flex: 1 1 auto;
+        padding: 32px;
         -webkit-overflow-scrolling: touch;
         overscroll-behavior: contain;
     }
@@ -1101,21 +1102,20 @@ body.wf-design-mode .hs-form-success {
         padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
     }
 
-    /* Content panel: hide on mobile */
-    .wkz-content-panel {
-        display: none !important;
-    }
-
+    /* Content panel variant: override desktop styles on mobile */
     .wkz-overlay-panel.has-content-panel {
-        max-width: 100%;
         flex-direction: column;
-        padding: 0;
     }
 
     .wkz-overlay-panel.has-content-panel .wkz-overlay-body {
         flex: 1 1 auto;
         max-height: none;
-        padding: 32px;
+        background: #FFFFFF;
+    }
+
+    /* Content panel: hide on mobile */
+    .wkz-content-panel {
+        display: none !important;
     }
 
     .wkz-overlay-panel.has-content-panel .wkz-overlay-body .wkz-form-inner {
