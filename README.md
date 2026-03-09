@@ -9,12 +9,12 @@ Add these to your Webflow page:
 ```html
 <!-- In <head> -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/nurel07/wkz-form@main/dist/wkz-forms.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/wkz-forms.css" />
 
 <!-- Before </body> -->
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInputWithUtils.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/nurel07/wkz-form@main/dist/wkz-forms.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/nurel07/wkz-form@main/dist/wkz-forms-configs.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/wkz-forms.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/wkz-forms-configs.js"></script>
 ```
 
 ## Usage
@@ -92,15 +92,11 @@ dist/
 
 ## Updating After Changes
 
-After pushing to `main`, purge the jsDelivr cache for instant updates:
+All Webflow URLs use `@latest` — they never need to change.
 
-```
-https://purge.jsdelivr.net/gh/nurel07/wkz-form@main/dist/wkz-forms.css
-https://purge.jsdelivr.net/gh/nurel07/wkz-form@main/dist/wkz-forms.js
-https://purge.jsdelivr.net/gh/nurel07/wkz-form@main/dist/wkz-forms-configs.js
-```
-
-Otherwise, cache refreshes automatically within ~24 hours.
+1. Push your changes to `main` (any file in `dist/`)
+2. A GitHub Action automatically creates a new version tag and purges the `@latest` CDN cache
+3. Webflow picks up the changes within seconds — no manual steps needed
 
 ## Local Testing
 

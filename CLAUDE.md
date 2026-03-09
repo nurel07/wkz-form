@@ -16,8 +16,8 @@ dist/
 - **Config-only changes** for new form variants — add a new `WkzForms.register()` call in `wkz-forms-configs.js`
 - **Never add a build step** — files must stay as plain JS/CSS loadable via `<script>` and `<link>` tags
 - **HubSpot portal**: 4770265, default form: ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0
-- **CDN**: jsDelivr from GitHub — `https://cdn.jsdelivr.net/gh/nurel07/wkz-form@main/dist/`
-- **After pushing**, purge jsDelivr cache: `https://purge.jsdelivr.net/gh/nurel07/wkz-form@main/dist/<filename>`
+- **CDN**: jsDelivr from GitHub using `@latest` tag — URLs never change: `https://cdn.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/`
+- **After pushing**, a GitHub Action auto-creates a new version tag and purges the `@latest` CDN cache. No manual steps needed.
 - **Themes**: `data-wkz-theme="dark|light"` on container; CSS variables handle all theming
 - **intl-tel-input** v25.3.1 from CDN for phone fields
 - **RevenueHero** integration is optional per config (router ID in config)

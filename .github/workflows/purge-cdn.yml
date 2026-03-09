@@ -1,15 +1,37 @@
-name: Purge jsDelivr Cache
+name: Tag & Purge CDN
 on:
   push:
     branches: [main]
     paths: ['dist/**']
 
+permissions:
+  contents: write
+
 jobs:
-  purge:
+  tag-and-purge:
     runs-on: ubuntu-latest
     steps:
-      - name: Purge jsDelivr cache
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bump patch tag
+        id: tag
         run: |
-          curl -s "https://purge.jsdelivr.net/gh/nurel07/wkz-form@main/dist/wkz-forms.js"
-          curl -s "https://purge.jsdelivr.net/gh/nurel07/wkz-form@main/dist/wkz-forms.css"
-          curl -s "https://purge.jsdelivr.net/gh/nurel07/wkz-form@main/dist/wkz-forms-configs.js"
+          LATEST=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -1)
+          if [ -z "$LATEST" ]; then LATEST="v1.0.0"; fi
+          MAJOR=$(echo $LATEST | cut -d. -f1)
+          MINOR=$(echo $LATEST | cut -d. -f2)
+          PATCH=$(echo $LATEST | cut -d. -f3)
+          NEW="${MAJOR}.${MINOR}.$((PATCH + 1))"
+          echo "new_tag=$NEW" >> $GITHUB_OUTPUT
+          git tag "$NEW"
+          git push origin "$NEW"
+
+      - name: Purge jsDelivr @latest cache
+        run: |
+          echo "Tagged ${{ steps.tag.outputs.new_tag }}"
+          sleep 5
+          curl -s "https://purge.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/wkz-forms.js"
+          curl -s "https://purge.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/wkz-forms.css"
+          curl -s "https://purge.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/wkz-forms-configs.js"

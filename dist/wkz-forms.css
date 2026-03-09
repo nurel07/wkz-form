@@ -1050,13 +1050,13 @@ body.wf-design-mode .hs-form-success {
     }
 
     .wkz-overlay-panel {
+        display: flex;
+        flex-direction: column;
         width: 100%;
         max-width: 100%;
         max-height: 96dvh;
         border-radius: 16px 16px 0 0;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
+        overflow: hidden;
         transform: translateY(100%);
         opacity: 1;
         transition: transform 0.36s cubic-bezier(0.32, 0.72, 0, 1);
@@ -1075,6 +1075,26 @@ body.wf-design-mode .hs-form-success {
     .wkz-overlay .hs-back-btn,
     .wkz-overlay .hs-submit-row:has(.hs-continue-btn) {
         display: none !important;
+    }
+
+    .wkz-overlay-close {
+        position: static;
+        flex-shrink: 0;
+        align-self: stretch;
+        justify-content: flex-end;
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding: 16px;
+        background: var(--hs-bg-input);
+    }
+
+
+    .wkz-overlay-body {
+        overflow-y: auto;
+        flex: 1 1 auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
     }
 
     .wkz-form {
