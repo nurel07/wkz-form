@@ -1,0 +1,979 @@
+/* ============================================
+   WkzForms — Unified Form Styles
+   ============================================
+   Config-driven form system for Webflow + HubSpot.
+   Theme is set via data-wkz-theme="dark|light"
+   on the form container element.
+   ============================================ */
+
+/* ==========================================================================
+   Design Tokens (scoped by theme)
+   ========================================================================== */
+
+/* Light theme (default) */
+[data-wkz-theme="light"] {
+    --hs-font-family: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --hs-font-size: clamp(.875rem, .8239rem + .2273vw, 1rem);
+    --hs-label-size: clamp(.875rem, .8239rem + .2273vw, 1rem);
+    --hs-radius: var(--radius-sm, 8px);
+    --hs-gap: 24px;
+    --hs-transition: 150ms ease;
+
+    --hs-bg: #FFFFFF;
+    --hs-bg-input: #F6F8FA;
+    --hs-fg: #23282B;
+    --hs-fg-muted: #6D828A;
+    --hs-fg-placeholder: #C9D4D8;
+    --hs-border: rgba(0, 0, 0, 0.15);
+    --hs-border-focus: #2A3E66;
+    --hs-ring: rgba(42, 62, 102, 0.25);
+    --hs-accent: #2A3E66;
+    --hs-accent-hover: #1B2A4A;
+    --hs-error: #ef4444;
+    --hs-success-bg: #10b981;
+    --hs-btn-bg: #23282B;
+    --hs-btn-fg: #FFFFFF;
+    --hs-btn-hover: #3A3F42;
+}
+
+/* Dark theme */
+[data-wkz-theme="dark"] {
+    --hs-font-family: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --hs-font-size: clamp(.875rem, .8239rem + .2273vw, 1rem);
+    --hs-label-size: clamp(.875rem, .8239rem + .2273vw, 1rem);
+    --hs-radius: var(--radius-sm, 8px);
+    --hs-gap: 24px;
+    --hs-transition: 150ms ease;
+
+    --hs-bg: #1C1F20;
+    --hs-bg-input: #23282B;
+    --hs-fg: #FFFFFF;
+    --hs-fg-muted: #94A9B2;
+    --hs-fg-placeholder: #6D828A;
+    --hs-border: rgba(255, 255, 255, 0.1);
+    --hs-border-focus: #578BFF;
+    --hs-ring: rgba(87, 139, 255, 0.25);
+    --hs-accent: #578BFF;
+    --hs-accent-hover: #7FAAFF;
+    --hs-error: #ef4444;
+    --hs-success-bg: #10b981;
+    --hs-btn-bg: #FFCB05;
+    --hs-btn-fg: #0F1A30;
+    --hs-btn-hover: #E6B800;
+}
+
+/* ==========================================================================
+   Form Container
+   ========================================================================== */
+.wkz-form {
+    font-family: var(--hs-font-family);
+    color: var(--hs-fg);
+    -webkit-font-smoothing: antialiased;
+}
+
+.wkz-form-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--hs-gap);
+}
+
+/* ==========================================================================
+   2-Step Wizard
+   ========================================================================== */
+.hs-step {
+    display: none;
+    flex-direction: column;
+    gap: var(--hs-gap);
+}
+
+.hs-step.active {
+    display: flex;
+}
+
+/* Webflow Designer: show ALL steps */
+html.wf-design-mode .hs-step,
+body.wf-design-mode .hs-step {
+    display: flex !important;
+}
+
+.hs-step-footer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.hs-step-footer .hs-submit {
+    flex: 1;
+}
+
+.hs-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 4px;
+    font-size: var(--hs-font-size);
+    font-weight: 500;
+    font-family: var(--hs-font-family);
+    color: var(--hs-fg-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--hs-transition);
+    -webkit-appearance: none;
+    appearance: none;
+    white-space: nowrap;
+}
+
+.hs-back-btn:hover {
+    color: var(--hs-fg);
+}
+
+/* ==========================================================================
+   Field Wrapper
+   ========================================================================== */
+.hs-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+}
+
+/* ==========================================================================
+   Labels
+   ========================================================================== */
+.hs-label {
+    font-size: var(--hs-label-size);
+    font-weight: 500;
+    color: var(--hs-fg);
+    letter-spacing: -0.01em;
+    line-height: 1;
+}
+
+/* ==========================================================================
+   Text Inputs
+   ========================================================================== */
+.hs-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    font-size: max(16px, var(--hs-font-size));
+    font-family: var(--hs-font-family);
+    color: var(--hs-fg);
+    background-color: var(--hs-bg-input);
+    border: 1px solid var(--hs-border);
+    border-radius: var(--hs-radius);
+    outline: none;
+    transition: border-color var(--hs-transition), box-shadow var(--hs-transition);
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+.hs-input::placeholder {
+    color: var(--hs-fg-placeholder);
+}
+
+.hs-input:hover {
+    border-color: var(--hs-fg-muted);
+}
+
+.hs-input:focus {
+    border-color: var(--hs-border-focus);
+    box-shadow: 0 0 0 3px var(--hs-ring);
+}
+
+.hs-input.has-error {
+    border-color: var(--hs-error);
+}
+
+.hs-input.has-error:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* ==========================================================================
+   WebKit Autofill Overrides
+   ========================================================================== */
+.hs-input:-webkit-autofill,
+.hs-input:-webkit-autofill:hover,
+.hs-input:-webkit-autofill:focus,
+.hs-input:-webkit-autofill:active,
+.iti__tel-input:-webkit-autofill,
+.iti__tel-input:-webkit-autofill:hover,
+.iti__tel-input:-webkit-autofill:focus,
+.iti__tel-input:-webkit-autofill:active,
+.hs-select:-webkit-autofill,
+.hs-select:-webkit-autofill:hover,
+.hs-select:-webkit-autofill:focus,
+.hs-select:-webkit-autofill:active,
+.hs-industry-search:-webkit-autofill,
+.iti__search-input:-webkit-autofill,
+.hs-dropdown-toggle:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--hs-bg-input) inset !important;
+    -webkit-text-fill-color: var(--hs-fg) !important;
+    background-color: transparent !important;
+    color: var(--hs-fg) !important;
+}
+
+.hs-input:-webkit-autofill:focus,
+.iti__tel-input:-webkit-autofill:focus,
+.hs-select:-webkit-autofill:focus,
+.hs-dropdown-toggle:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--hs-bg-input) inset, 0 0 0 3px var(--hs-ring) !important;
+    border-color: var(--hs-border-focus);
+}
+
+.hs-input.has-error:-webkit-autofill,
+.hs-field .iti__tel-input.has-error:-webkit-autofill,
+.hs-field .has-error+.iti .iti__tel-input:-webkit-autofill {
+    border-color: var(--hs-error);
+}
+
+.hs-input.has-error:-webkit-autofill:focus,
+.hs-field .iti__tel-input.has-error:-webkit-autofill:focus,
+.hs-field .has-error+.iti .iti__tel-input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--hs-bg-input) inset, 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+    border-color: var(--hs-error);
+}
+
+/* ==========================================================================
+   intl-tel-input Overrides
+   ========================================================================== */
+.iti {
+    width: 100%;
+}
+
+.iti__tel-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    font-size: max(16px, var(--hs-font-size));
+    font-family: var(--hs-font-family);
+    color: var(--hs-fg);
+    background-color: var(--hs-bg-input);
+    border: 1px solid var(--hs-border);
+    border-radius: var(--hs-radius);
+    outline: none;
+    transition: border-color var(--hs-transition), box-shadow var(--hs-transition);
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+.iti__tel-input::placeholder {
+    color: var(--hs-fg-placeholder);
+}
+
+.iti__tel-input:hover {
+    border-color: var(--hs-fg-muted);
+}
+
+.iti__tel-input:focus {
+    border-color: var(--hs-border-focus);
+    box-shadow: 0 0 0 3px var(--hs-ring);
+}
+
+.hs-field .iti__tel-input.has-error,
+.hs-field .has-error+.iti .iti__tel-input {
+    border-color: var(--hs-error);
+}
+
+.iti__country-container {
+    border-radius: var(--hs-radius) 0 0 var(--hs-radius);
+}
+
+.iti__selected-country {
+    border-radius: var(--hs-radius) 0 0 var(--hs-radius);
+    background: transparent;
+}
+
+.iti__dropdown-content {
+    border: 1px solid var(--hs-border);
+    border-radius: var(--hs-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: var(--hs-font-family);
+    background-color: var(--hs-bg);
+}
+
+.iti__search-input {
+    font-family: var(--hs-font-family);
+    font-size: var(--hs-font-size);
+    border-radius: var(--hs-radius);
+    background-color: var(--hs-bg-input);
+    color: var(--hs-fg);
+    border: 1px solid var(--hs-border);
+}
+
+.iti__country {
+    font-size: var(--hs-font-size);
+    padding: 6px 10px;
+    color: var(--hs-fg);
+}
+
+.iti__country:hover,
+.iti__country--highlight {
+    background-color: var(--hs-bg-input);
+}
+
+.iti__selected-dial-code {
+    font-family: var(--hs-font-family);
+    font-size: var(--hs-font-size);
+    color: var(--hs-fg);
+}
+
+.iti__country-list {
+    background-color: var(--hs-bg) !important;
+    border: 1px solid var(--hs-border) !important;
+    color: var(--hs-fg) !important;
+    font-family: var(--hs-font-family) !important;
+    border-radius: var(--hs-radius) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.iti__country {
+    padding: 8px 10px !important;
+    font-size: var(--hs-font-size) !important;
+}
+
+.iti__country:hover,
+.iti__country.iti__highlight {
+    background-color: var(--hs-bg-input) !important;
+}
+
+.iti__country.iti__active {
+    background-color: var(--hs-border) !important;
+    font-weight: 500 !important;
+}
+
+.iti__divider {
+    border-bottom-color: var(--hs-border) !important;
+}
+
+.iti__arrow {
+    border-top-color: var(--hs-fg-muted) !important;
+}
+
+.iti__arrow--up {
+    border-bottom-color: var(--hs-fg-muted) !important;
+}
+
+/* ==========================================================================
+   Generic Dropdown
+   ========================================================================== */
+.hs-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.hs-dropdown-toggle {
+    width: 100%;
+    height: 40px;
+    padding: 0 16px;
+    font-size: var(--hs-font-size);
+    font-family: var(--hs-font-family);
+    color: var(--hs-fg);
+    background-color: var(--hs-bg-input);
+    border: 1px solid var(--hs-border);
+    border-radius: var(--hs-radius);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color var(--hs-transition), box-shadow var(--hs-transition);
+    box-sizing: border-box;
+}
+
+.hs-dropdown-toggle:hover {
+    border-color: var(--hs-fg-muted);
+}
+
+.hs-dropdown-toggle:focus {
+    outline: none;
+    border-color: var(--hs-border-focus);
+    box-shadow: 0 0 0 2px var(--hs-ring);
+}
+
+.hs-dropdown-toggle.placeholder {
+    color: var(--hs-fg-placeholder);
+}
+
+.hs-dropdown-toggle.active {
+    border-color: var(--hs-border-focus);
+}
+
+.hs-dropdown.has-error .hs-dropdown-toggle {
+    border-color: var(--hs-error);
+}
+
+.hs-dropdown-arrow {
+    transition: transform var(--hs-transition);
+    color: var(--hs-fg-muted);
+}
+
+.hs-dropdown.open .hs-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.hs-dropdown-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 4px;
+    border: 1px solid var(--hs-border);
+    border-radius: var(--hs-radius);
+    background-color: var(--hs-bg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.hs-dropdown.open .hs-dropdown-panel {
+    display: block;
+}
+
+.hs-dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.hs-dropdown-item {
+    padding: 8px 10px;
+    font-size: var(--hs-font-size);
+    color: var(--hs-fg);
+    cursor: pointer;
+    border-radius: calc(var(--hs-radius) - 2px);
+    transition: background-color var(--hs-transition);
+    line-height: 1.4;
+}
+
+.hs-dropdown-item:hover {
+    background-color: var(--hs-bg-input);
+}
+
+.hs-dropdown-item.selected {
+    background-color: var(--hs-border);
+    font-weight: 500;
+}
+
+.hs-dropdown-item:focus,
+.hs-industry-other-item:focus {
+    outline: 2px solid var(--hs-border-focus);
+    outline-offset: -2px;
+    background-color: var(--hs-bg-input);
+}
+
+/* ==========================================================================
+   Industry Chip Selector
+   ========================================================================== */
+.hs-industry-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.hs-industry-pill {
+    height: 30px;
+    padding: 0 12px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--hs-font-family);
+    color: var(--hs-fg);
+    background-color: transparent;
+    border: 1px solid var(--hs-border);
+    border-radius: 24px;
+    cursor: pointer;
+    transition: all var(--hs-transition);
+    white-space: nowrap;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.hs-industry-pill:hover {
+    border-color: var(--hs-fg-muted);
+    background-color: var(--hs-bg-input);
+}
+
+.hs-industry-pill.active {
+    background-color: var(--hs-btn-bg);
+    border-color: var(--hs-btn-bg);
+    color: var(--hs-btn-fg);
+}
+
+.hs-industry-pill--other.active {
+    background-color: var(--hs-btn-bg);
+    border-color: var(--hs-btn-bg);
+    color: var(--hs-btn-fg);
+}
+
+.hs-industry-other-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    margin-top: 8px;
+    border: 1px solid var(--hs-border);
+    border-radius: var(--hs-radius);
+    background-color: var(--hs-bg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.hs-industry-search {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    font-size: max(16px, var(--hs-font-size));
+    font-family: var(--hs-font-family);
+    color: var(--hs-fg);
+    background-color: var(--hs-bg);
+    border: none;
+    border-bottom: 1px solid var(--hs-border);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.hs-industry-search::placeholder {
+    color: var(--hs-fg-placeholder);
+}
+
+.hs-industry-other-list {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.hs-industry-other-item {
+    padding: 8px 10px;
+    font-size: var(--hs-font-size);
+    color: var(--hs-fg);
+    cursor: pointer;
+    border-radius: calc(var(--hs-radius) - 2px);
+    transition: background-color var(--hs-transition);
+    line-height: 1.4;
+}
+
+.hs-industry-other-item:hover {
+    background-color: var(--hs-bg-input);
+}
+
+.hs-industry-other-item.active {
+    background-color: var(--hs-border);
+    color: var(--hs-fg);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   Hidden Select (for form submission)
+   ========================================================================== */
+.hs-select {
+    width: 100%;
+    height: 40px;
+    padding: 0 36px 0 12px;
+    font-size: max(16px, var(--hs-font-size));
+    font-family: var(--hs-font-family);
+    color: var(--hs-fg);
+    background-color: var(--hs-bg-input);
+    border: 1px solid var(--hs-border);
+    border-radius: var(--hs-radius);
+    outline: none;
+    cursor: pointer;
+    transition: border-color var(--hs-transition), box-shadow var(--hs-transition);
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+.hs-select:hover {
+    border-color: var(--hs-fg-muted);
+}
+
+.hs-select:focus {
+    border-color: var(--hs-border-focus);
+    box-shadow: 0 0 0 3px var(--hs-ring);
+}
+
+/* ==========================================================================
+   Error Messages
+   ========================================================================== */
+.hs-error {
+    font-size: 12px;
+    color: var(--hs-error);
+    margin-top: 2px;
+    line-height: 1.4;
+    display: none;
+}
+
+.hs-error.visible {
+    display: block;
+}
+
+/* ==========================================================================
+   Submit Button
+   ========================================================================== */
+.hs-submit-row {
+    margin-top: 8px;
+}
+
+.hs-submit {
+    width: 100%;
+    padding: 8px 24px;
+    font-size: clamp(.875rem, .8239rem + .2273vw, 1rem);
+    font-weight: 600;
+    font-family: var(--hs-font-family);
+    line-height: 1.5;
+    color: var(--hs-btn-fg);
+    background-color: var(--hs-btn-bg);
+    border: 1px solid var(--hs-btn-bg);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color var(--hs-transition), box-shadow var(--hs-transition), transform 80ms ease;
+    letter-spacing: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+.hs-submit:hover {
+    background-color: var(--hs-btn-hover);
+    border-color: var(--hs-btn-hover);
+    transform: scale(1.02);
+}
+
+.hs-submit:active {
+    transform: scale(0.98);
+}
+
+.hs-submit:focus-visible {
+    outline: 2px solid var(--hs-btn-bg);
+    outline-offset: 2px;
+}
+
+.hs-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.hs-submit:disabled:hover {
+    transform: none;
+}
+
+/* ==========================================================================
+   Consent Checkbox
+   ========================================================================== */
+.hs-consent-field {
+    margin-top: 4px;
+}
+
+.hs-consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.hs-consent-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.hs-consent-checkmark {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--hs-border);
+    border-radius: 4px;
+    background: var(--hs-bg-input);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--hs-transition);
+    margin-top: 1px;
+}
+
+.hs-consent-label input[type="checkbox"]:checked~.hs-consent-checkmark {
+    background: var(--hs-accent);
+    border-color: var(--hs-accent);
+}
+
+.hs-consent-checkmark::after {
+    content: '';
+    display: none;
+    width: 10px;
+    height: 10px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+[data-wkz-theme="dark"] .hs-consent-checkmark::after {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='%230F1A30' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.hs-consent-label input[type="checkbox"]:checked~.hs-consent-checkmark::after {
+    display: block;
+}
+
+.hs-consent-label input[type="checkbox"]:focus-visible~.hs-consent-checkmark {
+    outline: 2px solid var(--hs-accent);
+    outline-offset: 2px;
+}
+
+.hs-consent-text {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--hs-fg-muted);
+}
+
+.hs-consent-text a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.hs-consent-text a:hover {
+    color: var(--hs-fg);
+}
+
+/* ==========================================================================
+   Success State
+   ========================================================================== */
+.hs-form-success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+html.wf-design-mode .hs-form-success,
+body.wf-design-mode .hs-form-success {
+    display: block;
+}
+
+.hs-success-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    background-color: var(--hs-success-bg);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.hs-success-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 8px;
+    color: var(--hs-fg);
+}
+
+.hs-success-text {
+    font-size: var(--hs-font-size);
+    color: var(--hs-fg-muted);
+    margin: 0;
+}
+
+.hs-success-cta {
+    display: inline-block;
+    margin-top: 20px;
+    width: auto;
+    padding: 8px 24px;
+    font-size: clamp(.875rem, .8239rem + .2273vw, 1rem);
+    font-weight: 600;
+    font-family: var(--hs-font-family);
+    line-height: 1.5;
+    color: var(--hs-btn-fg);
+    background-color: var(--hs-btn-bg);
+    border: 1px solid var(--hs-btn-bg);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color var(--hs-transition), box-shadow var(--hs-transition), transform 80ms ease;
+    letter-spacing: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.hs-success-cta:hover {
+    background-color: var(--hs-btn-hover);
+    border-color: var(--hs-btn-hover);
+    transform: scale(1.02);
+}
+
+.hs-success-cta:active {
+    transform: scale(0.98);
+}
+
+.hs-success-cta:focus-visible {
+    outline: 2px solid var(--hs-btn-bg);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Form-Level Error
+   ========================================================================== */
+.hs-form-error {
+    display: none;
+    padding: 12px 16px;
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--hs-error);
+    border-radius: var(--hs-radius);
+    font-size: 13px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Modal Overlay
+   ========================================================================== */
+.wkz-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wkz-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.wkz-overlay-panel {
+    position: relative;
+    background: var(--hs-bg);
+    border-radius: 16px;
+    max-width: 520px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 32px;
+    opacity: 0;
+    transform: scale(0.88);
+    transition:
+        transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wkz-overlay.is-open .wkz-overlay-panel {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.wkz-overlay-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid var(--hs-border);
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--hs-fg-muted);
+    font-size: 16px;
+    line-height: 1;
+    transition: color var(--hs-transition), border-color var(--hs-transition);
+    -webkit-appearance: none;
+    appearance: none;
+    z-index: 1;
+}
+
+.wkz-overlay-close:hover {
+    color: var(--hs-fg);
+    border-color: var(--hs-fg-muted);
+}
+
+/* ==========================================================================
+   Mobile Overrides
+   ========================================================================== */
+@media screen and (max-width: 767px) {
+
+    /* Modal: bottom-sheet */
+    .wkz-overlay {
+        align-items: flex-end;
+    }
+
+    .wkz-overlay-panel {
+        width: 100%;
+        max-width: 100%;
+        max-height: 96dvh;
+        border-radius: 16px 16px 0 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        transform: translateY(100%);
+        opacity: 1;
+        transition: transform 0.36s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .wkz-overlay.is-open .wkz-overlay-panel {
+        transform: translateY(0);
+    }
+
+    /* Show all steps at once */
+    .wkz-overlay .hs-step {
+        display: flex !important;
+    }
+
+    .wkz-overlay .hs-continue-btn,
+    .wkz-overlay .hs-back-btn,
+    .wkz-overlay .hs-submit-row:has(.hs-continue-btn) {
+        display: none !important;
+    }
+
+    .wkz-form {
+        padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* Dropdowns: inline on mobile */
+    .wkz-overlay .hs-dropdown-panel {
+        position: relative !important;
+        width: 100% !important;
+        max-height: none !important;
+        box-shadow: none !important;
+        border: 1px solid var(--hs-border) !important;
+        border-radius: var(--hs-radius) !important;
+        margin-top: 4px !important;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .wkz-overlay {
+        transition: opacity 0.15s ease;
+    }
+
+    .wkz-overlay-panel {
+        transform: none;
+        transition: opacity 0.15s ease;
+    }
+}

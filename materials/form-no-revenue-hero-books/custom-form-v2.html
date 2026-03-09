@@ -1,0 +1,262 @@
+<!-- ============================================
+     Custom HubSpot Form V2 — Webflow Embed
+     ============================================
+     Paste this into a Webflow Embed element.
+     Replace the existing HubSpot form block.
+
+     Requires: hubspot-form-styles.css + custom-form-v2.js
+     ============================================ -->
+
+
+<div id="custom-hs-form" class="hs-form">
+    <form id="hs-custom-form" novalidate>
+
+        <!-- Owner First Name -->
+        <div class="hs-field">
+            <label class="hs-label" for="hs-firstname">
+                <span>First name</span>
+            </label>
+            <input class="hs-input" type="text" id="hs-firstname" name="ownerFirstName" autocomplete="given-name"
+                required />
+            <div class="hs-error" data-for="ownerFirstName"></div>
+        </div>
+
+        <!-- Owner Last Name -->
+        <div class="hs-field">
+            <label class="hs-label" for="hs-lastname">
+                <span>Last name</span>
+            </label>
+            <input class="hs-input" type="text" id="hs-lastname" name="ownerLastName" autocomplete="family-name"
+                required />
+            <div class="hs-error" data-for="ownerLastName"></div>
+        </div>
+
+        <!-- Email Address -->
+        <div class="hs-field">
+            <label class="hs-label" for="hs-email">
+                <span>Email</span>
+            </label>
+            <input class="hs-input" type="email" id="hs-email" name="emailAddress" inputmode="email"
+                autocomplete="email" required />
+            <div class="hs-error" data-for="emailAddress"></div>
+        </div>
+
+        <!-- Phone Number (enhanced by intl-tel-input) -->
+        <div class="hs-field">
+            <label class="hs-label" for="hs-phone">
+                <span>Phone number</span>
+            </label>
+            <input class="hs-input" type="tel" id="hs-phone" name="phoneNumber" autocomplete="tel" required />
+            <div class="hs-error" data-for="phoneNumber"></div>
+        </div>
+
+        <!-- Business Name -->
+        <div class="hs-field">
+            <label class="hs-label" for="hs-company">
+                <span>Company name</span>
+            </label>
+            <input class="hs-input" type="text" id="hs-company" name="businessName" autocomplete="organization"
+                required />
+            <div class="hs-error" data-for="businessName"></div>
+        </div>
+
+        <!-- Industry Chip Selector (values from HubSpot API) -->
+        <div class="hs-field">
+            <label class="hs-label"><span>Industry</span></label>
+            <input type="hidden" id="hs-industry" name="industry" value="" />
+            <div class="hs-error" data-for="industry"></div>
+
+            <!-- Main chips (top 6 from HubSpot, displayOrder 0-5) -->
+            <div class="hs-industry-pills">
+                <button type="button" class="hs-industry-pill" data-value="HVAC">HVAC</button>
+                <button type="button" class="hs-industry-pill" data-value="Plumbing">Plumbing</button>
+                <button type="button" class="hs-industry-pill" data-value="Electrical">Electrical</button>
+                <button type="button" class="hs-industry-pill" data-value="Garage Door">Garage Door</button>
+                <button type="button" class="hs-industry-pill" data-value="Appliance Repair">Appliance Repair</button>
+                <button type="button" class="hs-industry-pill" data-value="Locksmith">Locksmith</button>
+                <button type="button" class="hs-industry-pill hs-industry-pill--other">Other</button>
+            </div>
+
+            <!-- "Other" dropdown — all remaining VISIBLE HubSpot options -->
+            <div class="hs-industry-other-panel" style="display:none;">
+                <input type="text" class="hs-industry-search" placeholder="Search industries…" />
+                <ul class="hs-industry-other-list">
+                    <li class="hs-industry-other-item" data-value="Air Duct Cleaning">Air Duct Cleaning</li>
+                    <li class="hs-industry-other-item" data-value="Alarm &amp; Smart Home">Alarm &amp; Home Automations
+                    </li>
+                    <li class="hs-industry-other-item" data-value="Auto Glass">Auto Glass</li>
+                    <li class="hs-industry-other-item" data-value="Automotive">Automotive</li>
+                    <li class="hs-industry-other-item" data-value="Carpet Cleaning">Carpet Cleaning</li>
+                    <li class="hs-industry-other-item" data-value="Chimney Sweep">Chimney Sweep</li>
+                    <li class="hs-industry-other-item" data-value="Construction">Construction</li>
+                    <li class="hs-industry-other-item" data-value="Fencing">Fencing</li>
+                    <li class="hs-industry-other-item" data-value="Flooring">Flooring</li>
+                    <li class="hs-industry-other-item" data-value="General Contracting">General Contracting</li>
+                    <li class="hs-industry-other-item" data-value="Handyman">Handyman</li>
+                    <li class="hs-industry-other-item" data-value="Home Remodeling">Home Remodeling</li>
+                    <li class="hs-industry-other-item" data-value="Insulation">Insulation</li>
+                    <li class="hs-industry-other-item" data-value="IT Services">IT Services</li>
+                    <li class="hs-industry-other-item" data-value="Janitorial Service">Janitorial Service</li>
+                    <li class="hs-industry-other-item" data-value="Junk Removal">Junk Removal</li>
+                    <li class="hs-industry-other-item" data-value="Landscaping">Landscaping</li>
+                    <li class="hs-industry-other-item" data-value="Lawn Care">Lawn Care</li>
+                    <li class="hs-industry-other-item" data-value="Maid &amp; Cleaning">Maid Services</li>
+                    <li class="hs-industry-other-item" data-value="Moving">Moving</li>
+                    <li class="hs-industry-other-item" data-value="Painting">Painting</li>
+                    <li class="hs-industry-other-item" data-value="Pest Control">Pest Control</li>
+                    <li class="hs-industry-other-item" data-value="Pool &amp; Spa Services">Pool &amp; Spa Services</li>
+                    <li class="hs-industry-other-item" data-value="Power Generation">Power Generation</li>
+                    <li class="hs-industry-other-item" data-value="Pressure Washing">Pressure Washing</li>
+                    <li class="hs-industry-other-item" data-value="Restoration">Restoration</li>
+                    <li class="hs-industry-other-item" data-value="Roofing">Roofing</li>
+                    <li class="hs-industry-other-item" data-value="Sliding Doors &amp; Windows">Sliding Windows &amp;
+                        Doors</li>
+                    <li class="hs-industry-other-item" data-value="Snow Removal">Snow Removal</li>
+                    <li class="hs-industry-other-item" data-value="Tree Care">Tree Care</li>
+                    <li class="hs-industry-other-item" data-value="Water treatment">Water Treatment</li>
+                    <li class="hs-industry-other-item" data-value="Other">Other</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Company Size (Custom Dropdown) -->
+        <div class="hs-field">
+            <label class="hs-label" for="hs-company-size">
+                <span>Company size range</span>
+            </label>
+            <div class="hs-dropdown" id="company_size_dropdown">
+                <button type="button" class="hs-dropdown-toggle placeholder" id="company_size_toggle">
+                    <span>Select one…</span>
+                    <svg class="hs-dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="hs-dropdown-panel">
+                    <ul class="hs-dropdown-list" id="company_size_list">
+                        <!-- Options populated via JS for consistency or mapped here -->
+                        <li class="hs-dropdown-item" data-value="1">Only me</li>
+                        <li class="hs-dropdown-item" data-value="2">2 techs</li>
+                        <li class="hs-dropdown-item" data-value="3_5">3 - 5 techs</li>
+                        <li class="hs-dropdown-item" data-value="6_10">6 - 10 techs</li>
+                        <li class="hs-dropdown-item" data-value="11+">11 - 20 techs</li>
+                        <li class="hs-dropdown-item" data-value="21 - 30 techs">21 - 30 techs</li>
+                        <li class="hs-dropdown-item" data-value="31 techs or more">31 techs or more</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Hidden native select for submission -->
+            <select class="hs-select" id="hs-company-size" name="companySize" style="display: none;">
+                <option value="">Select one…</option>
+                <option value="1">Only me</option>
+                <option value="2">2 techs</option>
+                <option value="3_5">3 - 5 techs</option>
+                <option value="6_10">6 - 10 techs</option>
+                <option value="11+">11 - 20 techs</option>
+                <option value="21 - 30 techs">21 - 30 techs</option>
+                <option value="31 techs or more">31 techs or more</option>
+            </select>
+            <div class="hs-error" data-for="companySize"></div>
+        </div>
+
+        <!-- How did you hear about us? (Custom Dropdown) -->
+        <div class="hs-field">
+            <label class="hs-label" for="hs-source-picklist">
+                <span>How did you hear about us?</span>
+            </label>
+            <div class="hs-dropdown" id="source_picklist_dropdown">
+                <button type="button" class="hs-dropdown-toggle placeholder" id="source_picklist_toggle">
+                    <span>Select one…</span>
+                    <svg class="hs-dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="hs-dropdown-panel">
+                    <ul class="hs-dropdown-list" id="source_picklist_list">
+                        <li class="hs-dropdown-item" data-value="TikTok">TikTok</li>
+                        <li class="hs-dropdown-item" data-value="Chat GPT/ AI tools">Chat GPT/ AI tools</li>
+                        <li class="hs-dropdown-item" data-value="Apple App Store/ Google Play">Apple App Store/ Google
+                            Play</li>
+                        <li class="hs-dropdown-item" data-value="Linkedin">Linkedin</li>
+                        <li class="hs-dropdown-item" data-value="Podcast">Podcast</li>
+                        <li class="hs-dropdown-item" data-value="Online Search">Online Search</li>
+                        <li class="hs-dropdown-item" data-value="Instagram">Instagram</li>
+                        <li class="hs-dropdown-item" data-value="Reddit/Quora">Reddit/Quora</li>
+                        <li class="hs-dropdown-item" data-value="Facebook">Facebook</li>
+                        <li class="hs-dropdown-item" data-value="YouTube">YouTube</li>
+                        <li class="hs-dropdown-item" data-value="Twitter">Twitter</li>
+                        <li class="hs-dropdown-item" data-value="TV">TV</li>
+                        <li class="hs-dropdown-item" data-value="Other">Other</li>
+                        <li class="hs-dropdown-item" data-value="From a friend">From a friend</li>
+                        <li class="hs-dropdown-item" data-value="Google/Bing">Google/Bing</li>
+                        <li class="hs-dropdown-item" data-value="Friend/referral">Friend/referral</li>
+                        <li class="hs-dropdown-item" data-value="My distributor">My distributor</li>
+                        <li class="hs-dropdown-item" data-value="Google">Google</li>
+                        <li class="hs-dropdown-item" data-value="Wizz">Wizz</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Hidden native select for submission -->
+            <select class="hs-select" id="hs-source-picklist" name="source_picklist" style="display: none;">
+                <option value="">Select one…</option>
+                <option value="TikTok">TikTok</option>
+                <option value="Chat GPT/ AI tools">Chat GPT/ AI tools</option>
+                <option value="Apple App Store/ Google Play">Apple App Store/ Google Play</option>
+                <option value="Linkedin">Linkedin</option>
+                <option value="Podcast">Podcast</option>
+                <option value="Online Search">Online Search</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Reddit/Quora">Reddit/Quora</option>
+                <option value="Facebook">Facebook</option>
+                <option value="YouTube">YouTube</option>
+                <option value="Twitter">Twitter</option>
+                <option value="TV">TV</option>
+                <option value="Other">Other</option>
+                <option value="From a friend">From a friend</option>
+                <option value="Google/Bing">Google/Bing</option>
+                <option value="Friend/referral">Friend/referral</option>
+                <option value="My distributor">My distributor</option>
+                <option value="Google">Google</option>
+                <option value="Wizz">Wizz</option>
+            </select>
+            <div class="hs-error" data-for="source_picklist"></div>
+        </div>
+
+        <!-- Consent Checkbox -->
+        <div class="hs-field hs-consent-field">
+            <label class="hs-consent-label">
+                <input type="checkbox" id="hs-consent" name="consent" checked />
+                <span class="hs-consent-checkmark"></span>
+                <span class="hs-consent-text">By submitting this form, you consent to receive communications from Workiz
+                    via phone, SMS, and email. Msg &amp; data rates may apply. Msg frequency may vary. Reply STOP to
+                    unsubscribe. See our <a href="https://www.workiz.com/privacy-policy/" target="_blank"
+                        rel="noopener">Privacy Policy</a> &amp; <a href="https://www.workiz.com/terms-and-conditions/"
+                        target="_blank" rel="noopener">Terms &amp; Conditions</a>.</span>
+            </label>
+        </div>
+
+        <!-- Submit -->
+        <div class="hs-submit-row">
+            <button type="submit" class="hs-submit" id="hs-submit-btn">
+                Get My Free Copy
+            </button>
+        </div>
+    </form>
+
+    <!-- Success message (hidden by default) -->
+    <div id="hs-form-success" class="hs-form-success">
+        <div class="hs-success-icon">✓</div>
+        <h3 class="hs-success-title">Thank you!</h3>
+        <p class="hs-success-text">Your free copy is on its way. Check your email.</p>
+    </div>
+
+    <!-- Error message (hidden by default) -->
+    <div id="hs-form-error" class="hs-form-error" style="display:none;">
+        Something went wrong. Please try again.
+    </div>
+</div>

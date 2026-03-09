@@ -1,0 +1,258 @@
+/* ============================================
+   WkzForms — Form Variant Configs
+   ============================================
+   Each register() call defines one form variant.
+   Add new forms by copying and modifying a config.
+   ============================================ */
+
+/* ------------------------------------------------------------------
+   Form 1: Free Book Download (inline, dark theme, single step)
+   Replaces: materials/form-no-revenue-hero-books/
+   ------------------------------------------------------------------ */
+WkzForms.register('free-book', {
+    mode: 'inline',
+    theme: 'dark',
+    steps: 1,
+    submitText: 'Get My Free Copy',
+    successTitle: 'Thank you!',
+    successText: 'Your free copy is on its way. Check your email.',
+    gtmEvent: 'book_demo_form_submit',
+    postSubmit: 'thankYou',
+
+    hubspot: {
+        portalId: '4770265',
+        formId: 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0'
+    },
+
+    hiddenFields: {
+        plumbing_dealership: 'none',
+        hvac_dealership: 'none',
+        hs_lead_status: 'New',
+        lead_type: 'DEMO'
+    },
+
+    fields: [
+        {
+            type: 'text',
+            name: 'ownerFirstName',
+            hsField: 'firstname',
+            label: 'First name',
+            required: true,
+            autocomplete: 'given-name'
+        },
+        {
+            type: 'text',
+            name: 'ownerLastName',
+            hsField: 'lastname',
+            label: 'Last name',
+            required: true,
+            autocomplete: 'family-name'
+        },
+        {
+            type: 'email',
+            name: 'emailAddress',
+            hsField: 'email',
+            label: 'Email',
+            required: true,
+            inputType: 'email',
+            inputMode: 'email',
+            autocomplete: 'email'
+        },
+        {
+            type: 'tel',
+            name: 'phoneNumber',
+            hsField: 'phone',
+            label: 'Phone number',
+            required: true,
+            inputType: 'tel',
+            autocomplete: 'tel'
+        },
+        {
+            type: 'text',
+            name: 'businessName',
+            hsField: 'company',
+            label: 'Company name',
+            required: true,
+            autocomplete: 'organization'
+        },
+        {
+            type: 'industryChips',
+            name: 'industry',
+            label: 'Industry',
+            required: true
+            // Uses default chips and "Other" list
+        },
+        {
+            type: 'dropdown',
+            name: 'companySize',
+            hsField: 'company_size_range',
+            label: 'Company size range',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please select a company size.'
+            // Uses default options (set below)
+        },
+        {
+            type: 'dropdown',
+            name: 'source_picklist',
+            hsField: 'source_picklist',
+            label: 'How did you hear about us?',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please tell us how you heard about us.'
+            // Uses default options (set below)
+        },
+        {
+            type: 'consent'
+        }
+    ]
+});
+
+/* ------------------------------------------------------------------
+   Form 2: Book a Demo Popup (modal, light theme, 2-step wizard)
+   Replaces: materials/book-a-demo-popup/
+   ------------------------------------------------------------------ */
+WkzForms.register('book-a-demo', {
+    mode: 'modal',
+    theme: 'light',
+    steps: 2,
+    trigger: '[data-action="book-a-demo"], [click="book-a-demo"]',
+    submitText: 'Book a demo now',
+    successTitle: 'Thank you!',
+    successText: "We'll be in touch shortly. In the meantime, explore the full product with a 7-day free trial \u2014 no credit card needed. 30 jobs per week stay free, forever.",
+    successCta: {
+        text: 'Start Free Trial',
+        url: 'https://www.workiz.com/signup/join-workiz/'
+    },
+    gtmEvent: 'book_demo_form_submit',
+    postSubmit: 'revenueHero',
+    revenueHeroRouter: '5125',
+
+    hubspot: {
+        portalId: '4770265',
+        formId: 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0'
+    },
+
+    hiddenFields: {
+        plumbing_dealership: 'none',
+        hvac_dealership: 'none',
+        hs_lead_status: 'New',
+        lead_type: 'DEMO'
+    },
+
+    fields: [
+        // --- Step 1: About You ---
+        {
+            type: 'text',
+            name: 'ownerFirstName',
+            hsField: 'firstname',
+            label: 'First Name',
+            required: true,
+            autocomplete: 'given-name',
+            step: 1
+        },
+        {
+            type: 'text',
+            name: 'ownerLastName',
+            hsField: 'lastname',
+            label: 'Last Name',
+            required: true,
+            autocomplete: 'family-name',
+            step: 1
+        },
+        {
+            type: 'email',
+            name: 'emailAddress',
+            hsField: 'email',
+            label: 'Email',
+            required: true,
+            inputType: 'email',
+            inputMode: 'email',
+            autocomplete: 'email',
+            step: 1
+        },
+        {
+            type: 'tel',
+            name: 'phoneNumber',
+            hsField: 'phone',
+            label: 'Phone Number',
+            required: true,
+            inputType: 'tel',
+            autocomplete: 'tel',
+            step: 1
+        },
+        {
+            type: 'text',
+            name: 'businessName',
+            hsField: 'company',
+            label: 'Company Name',
+            required: true,
+            autocomplete: 'organization',
+            step: 1
+        },
+
+        // --- Step 2: About Your Business ---
+        {
+            type: 'industryChips',
+            name: 'industry',
+            label: 'Industry',
+            required: true,
+            step: 2
+        },
+        {
+            type: 'dropdown',
+            name: 'companySize',
+            hsField: 'company_size_range',
+            label: 'Company size range',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please select a company size.',
+            step: 2
+        },
+        {
+            type: 'dropdown',
+            name: 'monthly_volume_range',
+            hsField: 'monthly_volume_range',
+            label: 'Estimated monthly revenue',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please select an estimated monthly revenue.',
+            step: 2,
+            options: [
+                { value: "It's a new business", label: "It's a new business" },
+                { value: '$0 - $10,000', label: '$0 - $10,000' },
+                { value: '$10,000 - $50,000', label: '$10,000 - $50,000' },
+                { value: '$50,000 - $100,000', label: '$50,000 - $100,000' },
+                { value: '$100,000 - $250,000', label: '$100,000 - $250,000' },
+                { value: 'More than $250,000', label: 'More than $250,000' },
+                { value: 'Rather not say', label: 'Rather not say' }
+            ]
+        },
+        {
+            type: 'dropdown',
+            name: 'source_picklist',
+            hsField: 'source_picklist',
+            label: 'How did you hear about us?',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please select how you heard about us.',
+            step: 2
+        },
+        {
+            type: 'dropdown',
+            name: 'preferred_demo_contact_method',
+            hsField: 'preferred_demo_contact_method',
+            label: 'How would you prefer to be contacted?',
+            required: false,
+            placeholder: 'Select one\u2026',
+            step: 2,
+            options: [
+                { value: 'Book a video meeting', label: 'Book a video meeting' },
+                { value: 'Get a phone call', label: 'Get a phone call' }
+            ]
+        },
+        {
+            type: 'consent'
+        }
+    ]
+});
