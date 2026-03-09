@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,36 +14,47 @@
     <link rel="stylesheet" href="wkz-forms.css" />
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: #f0f0f0;
             padding: 40px 20px;
         }
+
         .test-section {
             max-width: 520px;
             margin: 0 auto 60px;
         }
+
         .test-section h2 {
             margin-bottom: 20px;
             font-size: 18px;
             color: #333;
         }
+
         .dark-bg {
             background: #1C1F20;
             padding: 32px;
             border-radius: 16px;
         }
+
         .light-bg {
             background: #fff;
             padding: 32px;
             border-radius: 16px;
             border: 1px solid #e0e0e0;
         }
+
         .trigger-section {
             text-align: center;
             margin: 40px auto;
         }
+
         .demo-btn {
             padding: 12px 32px;
             font-size: 16px;
@@ -53,11 +65,13 @@
             border-radius: 8px;
             cursor: pointer;
         }
+
         .demo-btn:hover {
             background: #1B2A4A;
         }
     </style>
 </head>
+
 <body>
 
     <!-- ============ TEST 1: Inline Dark Form ============ -->
@@ -75,12 +89,21 @@
         <button class="demo-btn" data-action="book-a-demo">Book a Demo</button>
     </div>
 
-    <!-- Hidden placeholder for modal (engine moves it to body overlay) -->
+    <!-- ============ TEST 3: eBook Modal Trigger ============ -->
+    <div class="test-section trigger-section">
+        <h2>Form 3: eBook Download (modal, light, single step)</h2>
+        <p style="margin-bottom: 16px; color: #666;">Click the button to open the eBook modal:</p>
+        <button class="demo-btn" data-action="frm-ebook-01">Get Free eBook</button>
+    </div>
+
+    <!-- Hidden placeholders for modals (engine moves them to body overlay) -->
     <div data-wkz-form="book-a-demo"></div>
+    <div data-wkz-form="frm-ebook-01"></div>
 
     <!-- WkzForms Engine + Configs -->
     <script src="wkz-forms.js"></script>
     <script src="wkz-forms-configs.js"></script>
 
 </body>
+
 </html>

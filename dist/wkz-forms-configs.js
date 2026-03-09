@@ -112,10 +112,110 @@ WkzForms.register('free-book', {
    Form 2: Book a Demo Popup (modal, light theme, 2-step wizard)
    Replaces: materials/book-a-demo-popup/
    ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+   Form 3: eBook Download Popup (modal, light theme, single step)
+   ------------------------------------------------------------------ */
+WkzForms.register('frm-ebook-01', {
+    mode: 'modal',
+    theme: 'light',
+    steps: 1,
+    trigger: '[data-action="frm-ebook-01"]',
+    submitText: 'Get My Free Copy',
+    successTitle: 'Thank you!',
+    successText: 'Your free copy is on its way. Check your email.',
+    gtmEvent: 'book_demo_form_submit',
+    postSubmit: 'thankYou',
+
+    hubspot: {
+        portalId: '4770265',
+        formId: 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0'
+    },
+
+    hiddenFields: {
+        plumbing_dealership: 'none',
+        hvac_dealership: 'none',
+        hs_lead_status: 'New',
+        lead_type: 'DEMO'
+    },
+
+    fields: [
+        {
+            type: 'text',
+            name: 'ownerFirstName',
+            hsField: 'firstname',
+            label: 'First name',
+            required: true,
+            autocomplete: 'given-name'
+        },
+        {
+            type: 'text',
+            name: 'ownerLastName',
+            hsField: 'lastname',
+            label: 'Last name',
+            required: true,
+            autocomplete: 'family-name'
+        },
+        {
+            type: 'email',
+            name: 'emailAddress',
+            hsField: 'email',
+            label: 'Email',
+            required: true,
+            inputType: 'email',
+            inputMode: 'email',
+            autocomplete: 'email'
+        },
+        {
+            type: 'tel',
+            name: 'phoneNumber',
+            hsField: 'phone',
+            label: 'Phone number',
+            required: true,
+            inputType: 'tel',
+            autocomplete: 'tel'
+        },
+        {
+            type: 'text',
+            name: 'businessName',
+            hsField: 'company',
+            label: 'Company name',
+            required: true,
+            autocomplete: 'organization'
+        },
+        {
+            type: 'industryChips',
+            name: 'industry',
+            label: 'Industry',
+            required: true
+        },
+        {
+            type: 'dropdown',
+            name: 'companySize',
+            hsField: 'company_size_range',
+            label: 'Company size range',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please select a company size.'
+        },
+        {
+            type: 'dropdown',
+            name: 'source_picklist',
+            hsField: 'source_picklist',
+            label: 'How did you hear about us?',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please tell us how you heard about us.'
+        },
+        {
+            type: 'consent'
+        }
+    ]
+});
+
 WkzForms.register('book-a-demo', {
     mode: 'modal',
     theme: 'light',
-    steps: 2,
+    steps: 1,
     trigger: '[data-action="book-a-demo"], [click="book-a-demo"]',
     submitText: 'Book a demo now',
     successTitle: 'Thank you!',
@@ -125,8 +225,7 @@ WkzForms.register('book-a-demo', {
         url: 'https://www.workiz.com/signup/join-workiz/'
     },
     gtmEvent: 'book_demo_form_submit',
-    postSubmit: 'revenueHero',
-    revenueHeroRouter: '5125',
+    postSubmit: 'thankYou',
 
     hubspot: {
         portalId: '4770265',
