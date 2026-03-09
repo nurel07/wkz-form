@@ -328,14 +328,59 @@
     }
 
     /* ==========================================================================
+       Content Panel Builder (optional right-side marketing panel in modals)
+       ========================================================================== */
+
+    function buildContentPanelHtml(config) {
+        if (!config || !config.contentPanel) return '';
+        var cp = config.contentPanel;
+
+        var logoHtml = '';
+        if (cp.logo) {
+            if (cp.logo.indexOf('<svg') === 0) {
+                logoHtml = '<div class="wkz-cp-logo">' + cp.logo + '</div>';
+            } else {
+                logoHtml = '<div class="wkz-cp-logo"><img src="' + cp.logo + '" alt="Logo" /></div>';
+            }
+        }
+
+        var headingHtml = cp.heading ? '<h2 class="wkz-cp-heading">' + cp.heading + '</h2>' : '';
+        var subtitleHtml = cp.subtitle ? '<p class="wkz-cp-subtitle">' + cp.subtitle + '</p>' : '';
+
+        var bulletsHtml = '';
+        if (cp.bullets && cp.bullets.length) {
+            var checkSvg = '<img class="wkz-cp-check" src="https://cdn.prod.website-files.com/626f8f4af1df65572fcaeb58/69af2ca70f05855d389a3954_checkmark.svg" alt="" width="20" height="20" />';
+            bulletsHtml = '<ul class="wkz-cp-bullets">';
+            for (var i = 0; i < cp.bullets.length; i++) {
+                bulletsHtml += '<li class="wkz-cp-bullet">' + checkSvg + '<span>' + cp.bullets[i] + '</span></li>';
+            }
+            bulletsHtml += '</ul>';
+        }
+
+        var badgesHtml = cp.badgesImage ? '<img class="wkz-cp-badges" src="' + cp.badgesImage + '" alt="Trust badges" />' : '';
+
+        return '<div class="wkz-content-panel">' +
+            logoHtml + headingHtml + subtitleHtml + bulletsHtml + badgesHtml +
+            '</div>';
+    }
+
+    /* ==========================================================================
        Modal Wrapper
        ========================================================================== */
 
     function wrapInModal(formId, innerHtml) {
-        return '<div class="wkz-overlay" id="' + uid(formId, 'overlay') + '">' +
-            '<div class="wkz-overlay-panel" data-wkz-theme="' + (registry[formId].theme || 'light') + '">' +
-            '<button class="wkz-overlay-close" aria-label="Close">&times;</button>' +
+        var config = registry[formId];
+        var hasPanel = config.contentPanel ? ' has-content-panel' : '';
+        var contentPanelHtml = buildContentPanelHtml(config);
+        var overlayStyle = config.overlayBg
+            ? ' style="background:url(\'' + config.overlayBg + '\') center/cover no-repeat;"'
+            : '';
+
+        return '<div class="wkz-overlay" id="' + uid(formId, 'overlay') + '"' + overlayStyle + '>' +
+            '<div class="wkz-overlay-panel' + hasPanel + '" data-wkz-theme="' + (config.theme || 'light') + '">' +
+            '<button class="wkz-overlay-close" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.351562 1.51172C0 1.19531 0 0.632812 0.351562 0.316406C0.667969 0 1.19531 0 1.51172 0.316406L6.82031 5.625L12.1289 0.316406C12.4805 0 13.0078 0 13.3242 0.316406C13.6758 0.667969 13.6758 1.19531 13.3242 1.51172L8.01562 6.82031L13.3242 12.1289C13.6758 12.4453 13.6758 13.0078 13.3242 13.3242C13.0078 13.6406 12.4805 13.6406 12.1289 13.3242L6.82031 8.01562L1.51172 13.3242C1.19531 13.6406 0.667969 13.6406 0.351562 13.3242C0 13.0078 0 12.4453 0.351562 12.1289L5.66016 6.82031L0.351562 1.51172Z" fill="currentColor"/></svg></button>' +
             '<div class="wkz-overlay-body">' + innerHtml + '</div>' +
+            contentPanelHtml +
             '</div>' +
             '</div>';
     }
@@ -596,17 +641,7 @@
         var phoneConfig = (config && config.phoneOptions) || {};
 
         var itiInstance = window.intlTelInput(phoneInput, {
-            initialCountry: phoneConfig.initialCountry || 'auto',
-            geoIpLookup: function (callback) {
-                fetch('https://ipapi.co/json/')
-                    .then(function (res) { return res.json(); })
-                    .then(function (data) {
-                        callback((data && data.country) ? data.country : 'us');
-                    })
-                    .catch(function () {
-                        callback('us');
-                    });
-            },
+            initialCountry: 'us',
             separateDialCode: true,
             formatAsYouType: true,
             autoPlaceholder: 'aggressive',
@@ -907,7 +942,7 @@
                             }
                         }
 
-                        successDiv.style.display = 'block';
+                        successDiv.classList.add('visible');
 
                         // RevenueHero
                         if (config.postSubmit === 'revenueHero' && inst.hero) {

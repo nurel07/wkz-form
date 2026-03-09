@@ -120,7 +120,7 @@ WkzForms.register('frm-ebook-01', {
     theme: 'light',
     steps: 1,
     trigger: '[data-action="frm-ebook-01"]',
-    submitText: 'Get My Free Copy',
+    submitText: 'Get my free copy',
     successTitle: 'Thank you!',
     successText: 'Your free copy is on its way. Check your email.',
     gtmEvent: 'book_demo_form_submit',
@@ -205,6 +205,148 @@ WkzForms.register('frm-ebook-01', {
             required: true,
             placeholder: 'Select one\u2026',
             errorMessage: 'Please tell us how you heard about us.'
+        },
+        {
+            type: 'consent'
+        }
+    ]
+});
+
+/* ------------------------------------------------------------------
+   Form 4: Book a Demo with Content Panel (modal, light, 2-step)
+   Two-column layout: form left, marketing panel right
+   ------------------------------------------------------------------ */
+WkzForms.register('frm-book-a-demo-modale-01', {
+    mode: 'modal',
+    theme: 'light',
+    steps: 2,
+    trigger: '[data-action="frm-book-a-demo-modale-01"]',
+    overlayBg: 'https://cdn.prod.website-files.com/626f8f4af1df65572fcaeb58/69af315308c0ce45fbad29d0_bg-product.webp',
+    submitText: 'Book a demo now',
+    continueText: 'Continue',
+    successTitle: 'Thank you!',
+    successText: "We'll be in touch shortly. In the meantime, explore the full product with a 7-day free trial \u2014 no credit card needed. 30 jobs per week stay free, forever.",
+    successCta: {
+        text: 'Start Free Trial',
+        url: 'https://www.workiz.com/signup/join-workiz/'
+    },
+    gtmEvent: 'book_demo_form_submit',
+    postSubmit: 'thankYou',
+
+    contentPanel: {
+        logo: 'https://cdn.prod.website-files.com/626f8f4af1df65572fcaeb58/69af2ca7e68439d0b67157ec_workiz-logo-80.svg',
+        heading: 'See how pros like you win 3x more jobs',
+        bullets: [
+            'A walkthrough built around your workflow',
+            'See how Genius AI books jobs from missed calls \u2014 24/7',
+            'How teams your size cut 20+ hours of admin a week'
+        ],
+        badgesImage: 'https://cdn.prod.website-files.com/626f8f4af1df65572fcaeb58/699ef59cd293d7e6d2dd3c1a_badges-popup.png'
+    },
+
+    hubspot: {
+        portalId: '4770265',
+        formId: 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0'
+    },
+
+    hiddenFields: {
+        plumbing_dealership: 'none',
+        hvac_dealership: 'none',
+        hs_lead_status: 'New',
+        lead_type: 'DEMO'
+    },
+
+    fields: [
+        // --- Step 1: About You ---
+        {
+            type: 'text',
+            name: 'ownerFirstName',
+            hsField: 'firstname',
+            label: 'First Name',
+            required: true,
+            autocomplete: 'given-name',
+            step: 1
+        },
+        {
+            type: 'text',
+            name: 'ownerLastName',
+            hsField: 'lastname',
+            label: 'Last Name',
+            required: true,
+            autocomplete: 'family-name',
+            step: 1
+        },
+        {
+            type: 'email',
+            name: 'emailAddress',
+            hsField: 'email',
+            label: 'Email',
+            required: true,
+            inputType: 'email',
+            inputMode: 'email',
+            autocomplete: 'email',
+            step: 1
+        },
+        {
+            type: 'tel',
+            name: 'phoneNumber',
+            hsField: 'phone',
+            label: 'Phone Number',
+            required: true,
+            inputType: 'tel',
+            autocomplete: 'tel',
+            step: 1
+        },
+        {
+            type: 'text',
+            name: 'businessName',
+            hsField: 'company',
+            label: 'Company Name',
+            required: true,
+            autocomplete: 'organization',
+            step: 1
+        },
+
+        // --- Step 2: About Your Business ---
+        {
+            type: 'industryChips',
+            name: 'industry',
+            label: 'Industry',
+            required: true,
+            step: 2
+        },
+        {
+            type: 'dropdown',
+            name: 'companySize',
+            hsField: 'company_size_range',
+            label: 'Company size range',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please select a company size.',
+            step: 2
+        },
+        {
+            type: 'dropdown',
+            name: 'source_picklist',
+            hsField: 'source_picklist',
+            label: 'How did you hear about us?',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please select how you heard about us.',
+            step: 2
+        },
+        {
+            type: 'dropdown',
+            name: 'preferred_demo_contact_method',
+            hsField: 'preferred_demo_contact_method',
+            label: 'How would you prefer to be contacted?',
+            required: false,
+            placeholder: 'Select one\u2026',
+            step: 2,
+            options: [
+                { value: 'Book a video meeting', label: 'Book a video meeting' },
+                { value: 'Get a phone call', label: 'Get a phone call' }
+            ]
         },
         {
             type: 'consent'

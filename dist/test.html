@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WkzForms Test Page</title>
 
+    <!-- Cal Sans for content panel heading -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cal-sans@1.0.1/index.css" />
+
     <!-- intl-tel-input -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css" />
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInputWithUtils.min.js"></script>
@@ -89,6 +92,13 @@
         <button class="demo-btn" data-action="book-a-demo">Book a Demo</button>
     </div>
 
+    <!-- ============ TEST 4: Book a Demo with Content Panel ============ -->
+    <div class="test-section trigger-section">
+        <h2>Form 4: Book a Demo with Panel (modal, light, 2-step)</h2>
+        <p style="margin-bottom: 16px; color: #666;">Click the button to open the two-column modal:</p>
+        <button class="demo-btn" data-action="frm-book-a-demo-modale-01">Book a Demo (Panel)</button>
+    </div>
+
     <!-- ============ TEST 3: eBook Modal Trigger ============ -->
     <div class="test-section trigger-section">
         <h2>Form 3: eBook Download (modal, light, single step)</h2>
@@ -99,6 +109,7 @@
     <!-- Hidden placeholders for modals (engine moves them to body overlay) -->
     <div data-wkz-form="book-a-demo"></div>
     <div data-wkz-form="frm-ebook-01"></div>
+    <div data-wkz-form="frm-book-a-demo-modale-01"></div>
 
     <!-- WkzForms Engine + Configs -->
     <script src="wkz-forms.js"></script>

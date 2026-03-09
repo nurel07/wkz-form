@@ -35,11 +35,12 @@ Add these to your Webflow page:
 
 ## Available Variants
 
-| Variant | Mode | Theme | Steps | Post-Submit |
-|---|---|---|---|---|
-| `free-book` | inline | dark | 1 | Thank you |
-| `book-a-demo` | modal | light | 2 | RevenueHero |
-| `frm-ebook-01` | modal | light | 1 | Thank you |
+| Variant | Mode | Theme | Steps | Post-Submit | Content Panel |
+|---|---|---|---|---|---|
+| `free-book` | inline | dark | 1 | Thank you | — |
+| `book-a-demo` | modal | light | 1 | Thank you | — |
+| `frm-ebook-01` | modal | light | 1 | Thank you | — |
+| `frm-book-a-demo-modale-01` | modal | light | 2 | Thank you | Yes |
 
 ## Creating a New Variant
 
@@ -55,6 +56,15 @@ WkzForms.register('my-new-form', {
     successTitle: 'Thank you!',
     successText: 'We will be in touch.',
     postSubmit: 'thankYou',  // 'thankYou' or 'revenueHero'
+    overlayBg: 'https://example.com/bg.webp',  // optional: replaces dark overlay with image
+
+    // Optional: right-side marketing panel (modal only)
+    contentPanel: {
+        logo: 'https://example.com/logo.svg',   // URL or inline <svg> string
+        heading: 'Your heading here',
+        bullets: ['Bullet 1', 'Bullet 2', 'Bullet 3'],
+        badgesImage: 'https://example.com/badges.png'
+    },
 
     hubspot: {
         portalId: '4770265',

@@ -287,6 +287,7 @@ body.wf-design-mode .hs-step {
     background: transparent;
 }
 
+
 .iti__dropdown-content {
     border: 1px solid var(--hs-border);
     border-radius: var(--hs-radius);
@@ -772,6 +773,10 @@ body.wf-design-mode .hs-step {
     padding: 40px 20px;
 }
 
+.hs-form-success.visible {
+    display: block;
+}
+
 html.wf-design-mode .hs-form-success,
 body.wf-design-mode .hs-form-success {
     display: block;
@@ -906,13 +911,13 @@ body.wf-design-mode .hs-form-success {
     align-items: center;
     justify-content: center;
     background: none;
-    border: 1px solid var(--hs-border);
-    border-radius: 50%;
+    border: none;
+    border-radius: 0;
     cursor: pointer;
-    color: var(--hs-fg-muted);
-    font-size: 16px;
+    color: #6D828A;
     line-height: 1;
-    transition: color var(--hs-transition), border-color var(--hs-transition);
+    padding: 0;
+    transition: color var(--hs-transition);
     -webkit-appearance: none;
     appearance: none;
     z-index: 1;
@@ -920,7 +925,117 @@ body.wf-design-mode .hs-form-success {
 
 .wkz-overlay-close:hover {
     color: var(--hs-fg);
-    border-color: var(--hs-fg-muted);
+}
+
+/* ==========================================================================
+   Two-Column Modal with Content Panel
+   ========================================================================== */
+.wkz-overlay-panel.has-content-panel {
+    display: flex;
+    flex-direction: row;
+    max-width: 800px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.wkz-overlay-panel.has-content-panel .wkz-overlay-close {
+    top: 20px;
+    right: 20px;
+}
+
+.wkz-overlay-panel.has-content-panel .wkz-overlay-body {
+    flex: 0 0 400px;
+    padding: 32px;
+    overflow-y: auto;
+    max-height: 90vh;
+    background: #F6F8FA;
+    display: flex;
+    flex-direction: column;
+}
+
+.wkz-overlay-panel.has-content-panel .wkz-overlay-body .wkz-form-inner {
+    flex: 1;
+    justify-content: space-between;
+}
+
+.wkz-overlay-panel.has-content-panel .wkz-overlay-body .hs-form-success.visible {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.wkz-content-panel {
+    flex: 1 1 auto;
+    background: #FFFFFF;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+}
+
+.wkz-cp-logo {
+    margin-bottom: 0;
+}
+
+.wkz-cp-logo img,
+.wkz-cp-logo svg {
+    height: 26px;
+    width: auto;
+}
+
+.wkz-cp-heading {
+    font-family: "Cal Sans", "Google Sans", var(--hs-font-family);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.005em;
+    color: #23282B;
+    margin: 0;
+}
+
+.wkz-cp-subtitle {
+    font-family: "Google Sans Flex", "Google Sans", var(--hs-font-family);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #23282B;
+    margin: 0;
+}
+
+.wkz-cp-bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.wkz-cp-bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-family: "Google Sans Flex", "Google Sans", var(--hs-font-family);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #23282B;
+}
+
+.wkz-cp-check {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.wkz-cp-badges {
+    width: 284px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-top: 0;
 }
 
 /* ==========================================================================
@@ -963,6 +1078,27 @@ body.wf-design-mode .hs-form-success {
 
     .wkz-form {
         padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* Content panel: hide on mobile */
+    .wkz-content-panel {
+        display: none !important;
+    }
+
+    .wkz-overlay-panel.has-content-panel {
+        max-width: 100%;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .wkz-overlay-panel.has-content-panel .wkz-overlay-body {
+        flex: 1 1 auto;
+        max-height: none;
+        padding: 32px;
+    }
+
+    .wkz-overlay-panel.has-content-panel .wkz-overlay-body .wkz-form-inner {
+        justify-content: flex-start;
     }
 
     /* Dropdowns: inline on mobile */
