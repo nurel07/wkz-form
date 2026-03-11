@@ -128,14 +128,14 @@ WkzForms.register('frm-ebook-01', {
 
     hubspot: {
         portalId: '4770265',
-        formId: 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0'
+        formId: '14467c87-dadc-4770-9eda-d5f568e3eeec'
     },
 
     hiddenFields: {
-        plumbing_dealership: 'none',
-        hvac_dealership: 'none',
-        hs_lead_status: 'New',
-        lead_type: 'DEMO'
+        hs_lead_status: 'OPEN',
+        lead_type: 'Content',
+        interest: 'eBook General',
+        sms_consent: 'Yes'
     },
 
     fields: [
@@ -196,15 +196,6 @@ WkzForms.register('frm-ebook-01', {
             required: true,
             placeholder: 'Select one\u2026',
             errorMessage: 'Please select a company size.'
-        },
-        {
-            type: 'dropdown',
-            name: 'source_picklist',
-            hsField: 'source_picklist',
-            label: 'How did you hear about us?',
-            required: true,
-            placeholder: 'Select one\u2026',
-            errorMessage: 'Please tell us how you heard about us.'
         },
         {
             type: 'consent'

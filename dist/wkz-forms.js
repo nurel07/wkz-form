@@ -869,6 +869,11 @@
             }
         }
 
+        // Dynamic ebook_name from trigger button
+        if (inst.ebookName) {
+            hsFields.push({ name: 'ebook_name', value: inst.ebookName });
+        }
+
         // Cookies
         COOKIE_MAP.forEach(function (c) {
             var cv = getCookie(c.cookie);
@@ -1083,6 +1088,11 @@
                 document.querySelectorAll(trigger).forEach(function (el) {
                     el.addEventListener('click', function (e) {
                         e.preventDefault();
+                        // Capture dynamic data attributes from trigger button
+                        var ebookName = e.currentTarget.getAttribute('data-ebook-name');
+                        if (ebookName) {
+                            instances[formId].ebookName = ebookName;
+                        }
                         openPopup(formId);
                     });
                 });
