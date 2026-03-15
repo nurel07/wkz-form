@@ -345,6 +345,79 @@ WkzForms.register('frm-book-a-demo-modale-01', {
     ]
 });
 
+/* ------------------------------------------------------------------
+   Form 5: Expert Consultation (inline, light theme, single step)
+   HubSpot: TODO — connect later
+   ------------------------------------------------------------------ */
+WkzForms.register('frm-expert-consultation-01', {
+    mode: 'inline',
+    theme: 'light',
+    steps: 1,
+    submitText: 'Book My Consultation',
+    successTitle: 'Thank you!',
+    successText: 'We\'ve received your request. An expert will reach out to you shortly.',
+    gtmEvent: 'expert_consultation_form_submit',
+    postSubmit: 'thankYou',
+
+    hubspot: {
+        portalId: '4770265',
+        formId: 'REPLACE_WITH_HUBSPOT_FORM_ID'
+    },
+
+    hiddenFields: {
+        hs_lead_status: 'New',
+        lead_type: 'Consultation'
+    },
+
+    fields: [
+        {
+            type: 'text',
+            name: 'fullName',
+            hsField: 'firstname',
+            label: 'Name',
+            required: true,
+            autocomplete: 'name'
+        },
+        {
+            type: 'text',
+            name: 'businessName',
+            hsField: 'company',
+            label: 'Company Name',
+            required: true,
+            autocomplete: 'organization'
+        },
+        {
+            type: 'dropdown',
+            name: 'companySize',
+            hsField: 'company_size_range',
+            label: 'Company Size',
+            required: true,
+            placeholder: 'Select one\u2026',
+            errorMessage: 'Please select a company size.'
+        },
+        {
+            type: 'email',
+            name: 'emailAddress',
+            hsField: 'email',
+            label: 'Email',
+            required: true,
+            inputType: 'email',
+            inputMode: 'email',
+            autocomplete: 'email'
+        },
+        {
+            type: 'text',
+            name: 'mainConcern',
+            hsField: 'message',
+            label: 'What\'s your main concern?',
+            required: true
+        },
+        {
+            type: 'consent'
+        }
+    ]
+});
+
 WkzForms.register('book-a-demo', {
     mode: 'modal',
     theme: 'light',
