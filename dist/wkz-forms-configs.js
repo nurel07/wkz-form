@@ -379,12 +379,28 @@ WkzForms.register('frm-expert-consultation-01', {
             autocomplete: 'name'
         },
         {
+            type: 'email',
+            name: 'emailAddress',
+            hsField: 'email',
+            label: 'Email',
+            required: true,
+            inputType: 'email',
+            inputMode: 'email',
+            autocomplete: 'email'
+        },
+        {
             type: 'text',
             name: 'businessName',
             hsField: 'company',
             label: 'Company Name',
             required: true,
             autocomplete: 'organization'
+        },
+        {
+            type: 'industryChips',
+            name: 'industry',
+            label: 'Industry',
+            required: true
         },
         {
             type: 'dropdown',
@@ -394,16 +410,6 @@ WkzForms.register('frm-expert-consultation-01', {
             required: true,
             placeholder: 'Select one\u2026',
             errorMessage: 'Please select a company size.'
-        },
-        {
-            type: 'email',
-            name: 'emailAddress',
-            hsField: 'email',
-            label: 'Email',
-            required: true,
-            inputType: 'email',
-            inputMode: 'email',
-            autocomplete: 'email'
         },
         {
             type: 'text',
