@@ -222,7 +222,8 @@ WkzForms.register('frm-book-a-demo-modale-01', {
         url: 'https://www.workiz.com/signup/join-workiz/'
     },
     gtmEvent: 'book_demo_form_submit',
-    postSubmit: 'thankYou',
+    postSubmit: 'revenueHero',
+    revenueHeroRouter: '5125',
 
     contentPanel: {
         logo: 'https://cdn.prod.website-files.com/626f8f4af1df65572fcaeb58/69af2ca7e68439d0b67157ec_workiz-logo-80.svg',

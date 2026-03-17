@@ -40,7 +40,39 @@ Add these to your Webflow page:
 | `free-book` | inline | dark | 1 | Thank you | — |
 | `book-a-demo` | modal | light | 1 | Thank you | — |
 | `frm-ebook-01` | modal | light | 1 | Thank you | — |
-| `frm-book-a-demo-modale-01` | modal | light | 2 | Thank you | Yes |
+| `frm-book-a-demo-modale-01` | modal | light | 2 | RevenueHero | Yes |
+
+## RevenueHero — Meeting Scheduler After Submit
+
+To show a RevenueHero meeting scheduler instead of the thank-you screen after form submission, set these two options in the form config:
+
+```js
+postSubmit: 'revenueHero',
+revenueHeroRouter: '5125',   // your RevenueHero router ID
+```
+
+That's it — the engine automatically loads the RevenueHero script and opens the scheduler after a successful submission. No extra scripts needed in Webflow.
+
+If RevenueHero fails to load, the form falls back to the standard thank-you screen.
+
+## Ebook Form — Dynamic ebook_name
+
+The `frm-ebook-01` variant supports multiple ebooks through a single form. Each button passes an `ebook_name` to HubSpot via `data-ebook-name`:
+
+```html
+<button data-action="frm-ebook-01" data-ebook-name="the-hvac-success-formula">Download</button>
+<button data-action="frm-ebook-01" data-ebook-name="scaling-your-business">Download</button>
+```
+
+### HubSpot email personalization setup
+
+The full book title and download link are mapped server-side in HubSpot (not exposed in frontend code):
+
+1. **Contact properties** — create `ebook_title` (single-line text) and `ebook_link` (single-line text)
+2. **Workflow** — trigger on form submission (`14467c87-dadc-4770-9eda-d5f568e3eeec`), use if/then branches by `ebook_name` to set `ebook_title` and `ebook_link`
+3. **Email tokens** — use `{{ contact.ebook_title }}` for the title and `{{ contact.ebook_link }}` for the download button URL
+
+Note: properties get overwritten on each download, but emails are sent immediately via the workflow so the correct values are always used.
 
 ## Creating a New Variant
 
