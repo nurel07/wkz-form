@@ -386,13 +386,11 @@
     }
 
     function showEbookSuccess(successDiv, inst) {
-        if (!successDiv) return;
+        if (!successDiv || !inst.ebookName) return;
 
         // Update title with book name
-        if (inst.ebookName) {
-            var titleEl = successDiv.querySelector('.hs-success-title');
-            if (titleEl) titleEl.textContent = 'Your copy of \u201C' + inst.ebookName + '\u201D is ready!';
-        }
+        var titleEl = successDiv.querySelector('.hs-success-title');
+        if (titleEl) titleEl.textContent = 'Your copy of \u201C' + inst.ebookName + '\u201D is ready!';
 
         // Update text
         var textEl = successDiv.querySelector('.hs-success-text');
