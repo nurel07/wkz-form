@@ -385,6 +385,85 @@
             '</div>';
     }
 
+    function showEbookSuccess(successDiv, inst) {
+        if (!successDiv) return;
+
+        // Update title with book name
+        if (inst.ebookName) {
+            var titleEl = successDiv.querySelector('.hs-success-title');
+            if (titleEl) titleEl.textContent = 'Your copy of ' + inst.ebookName + ' is ready!';
+        }
+
+        // Update text
+        var textEl = successDiv.querySelector('.hs-success-text');
+        if (textEl) textEl.textContent = inst.ebookUrl
+            ? 'Click the button below to download your free copy.'
+            : 'Your free copy is on its way. Check your email.';
+
+        // Add/replace download button
+        if (inst.ebookUrl) {
+            var existingCta = successDiv.querySelector('.hs-success-cta');
+            if (existingCta) existingCta.remove();
+            var dlLink = document.createElement('a');
+            dlLink.href = inst.ebookUrl;
+            dlLink.target = '_blank';
+            dlLink.rel = 'noopener';
+            dlLink.className = 'hs-success-cta';
+            dlLink.textContent = 'Download your ebook';
+            successDiv.appendChild(dlLink);
+        }
+    }
+
+    function resetFormState(formId) {
+        var inst = instances[formId];
+        var config = registry[formId];
+        if (!inst) return;
+
+        var successDiv = inst.successDiv;
+        if (successDiv && successDiv.classList.contains('visible')) {
+            successDiv.classList.remove('visible');
+            // Remove dynamically injected download CTA
+            var dlCta = successDiv.querySelector('.hs-success-cta');
+            if (dlCta) dlCta.remove();
+        }
+
+        if (inst.form) {
+            inst.form.style.display = '';
+            inst.form.reset();
+        }
+
+        if (inst.submitBtn) {
+            inst.submitBtn.disabled = false;
+            inst.submitBtn.textContent = config.submitText || 'Submit';
+        }
+
+        // Reset dropdowns to placeholder
+        var dropdowns = inst.root.querySelectorAll('.hs-dropdown-toggle span');
+        dropdowns.forEach(function (span) {
+            var select = span.closest('.hs-field-row').querySelector('select');
+            if (select) {
+                select.value = '';
+                var placeholder = select.querySelector('option[value=""]');
+                if (placeholder) span.textContent = placeholder.textContent;
+            }
+        });
+
+        // Reset to step 1 if multi-step
+        if ((config.steps || 1) > 1 && inst.currentStep !== 1) {
+            inst.currentStep = 1;
+            var step1 = inst.root.querySelector('.wkz-step-1');
+            var step2 = inst.root.querySelector('.wkz-step-2');
+            if (step1) step1.style.display = '';
+            if (step2) step2.style.display = 'none';
+        }
+
+        // Clear errors
+        clearAllErrors(inst.root);
+
+        inst.ebookUrl = null;
+        inst.ebookName = null;
+    }
+
     function openPopup(formId) {
         var overlay = document.getElementById(uid(formId, 'overlay'));
         if (!overlay) return;
@@ -394,6 +473,9 @@
             clearTimeout(inst.closeTimer);
             inst.closeTimer = null;
         }
+
+        // Reset form to initial state if it was previously submitted
+        resetFormState(formId);
 
         overlay.style.display = 'flex';
         requestAnimationFrame(function () {
@@ -947,17 +1029,16 @@
                             }
                         }
 
-                        // Dynamic ebook download button
-                        if (inst.ebookUrl) {
-                            var existingCta = successDiv.querySelector('.hs-success-cta');
-                            if (existingCta) existingCta.remove();
-                            var dlLink = document.createElement('a');
-                            dlLink.href = inst.ebookUrl;
-                            dlLink.target = '_blank';
-                            dlLink.rel = 'noopener';
-                            dlLink.className = 'hs-success-cta';
-                            dlLink.textContent = 'Download your ebook';
-                            successDiv.appendChild(dlLink);
+                        // Dynamic ebook success message and download button
+                        showEbookSuccess(successDiv, inst);
+
+                        // Save form data for session reuse
+                        if (config.reuseSession) {
+                            try {
+                                // Filter out ebook_name — it changes per book
+                                var reusableFields = hsFields.filter(function (f) { return f.name !== 'ebook_name'; });
+                                sessionStorage.setItem('wkzEbookData', JSON.stringify(reusableFields));
+                            } catch (e) { /* sessionStorage unavailable */ }
                         }
 
                         successDiv.classList.add('visible');
@@ -1103,14 +1184,47 @@
                         e.preventDefault();
                         // Capture dynamic data attributes from trigger button
                         var ebookName = e.currentTarget.getAttribute('data-ebook-name');
-                        if (ebookName) {
-                            instances[formId].ebookName = ebookName;
-                        }
                         var ebookUrl = e.currentTarget.getAttribute('data-ebook-url');
-                        if (ebookUrl) {
-                            instances[formId].ebookUrl = ebookUrl;
+
+                        // Fast-path: skip form if session data exists
+                        if (config.reuseSession) {
+                            try {
+                                var saved = sessionStorage.getItem('wkzEbookData');
+                                if (saved) {
+                                    var savedFields = JSON.parse(saved);
+                                    if (ebookName) savedFields.push({ name: 'ebook_name', value: ebookName });
+                                    COOKIE_MAP.forEach(function (c) {
+                                        var cv = getCookie(c.cookie);
+                                        if (cv) savedFields.push({ name: c.field, value: cv });
+                                    });
+                                    // Submit to HubSpot in background
+                                    var hs = config.hubspot || {};
+                                    var apiUrl = 'https://api.hsforms.com/submissions/v3/integration/submit/' + (hs.portalId || '4770265') + '/' + (hs.formId || 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0');
+                                    var payload = { fields: savedFields, context: { pageUri: window.location.href, pageName: document.title } };
+                                    var hutk = getCookie('hubspotutk');
+                                    if (hutk) payload.context.hutk = hutk;
+                                    fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(function () {});
+                                    if (window.dataLayer) {
+                                        window.dataLayer.push({ event: config.gtmEvent || 'book_demo_form_submit', formId: hs.formId, portalId: hs.portalId });
+                                    }
+                                    // Open modal, then set ebook data (openPopup resets state)
+                                    openPopup(formId);
+                                    var inst = instances[formId];
+                                    inst.ebookName = ebookName;
+                                    inst.ebookUrl = ebookUrl;
+                                    inst.form.style.display = 'none';
+                                    showEbookSuccess(inst.successDiv, inst);
+                                    inst.successDiv.classList.add('visible');
+                                    return;
+                                }
+                            } catch (ex) { /* sessionStorage unavailable */ }
                         }
+
+                        // Normal path: open popup, then set ebook data after reset
                         openPopup(formId);
+                        var inst = instances[formId];
+                        if (ebookName) inst.ebookName = ebookName;
+                        if (ebookUrl) inst.ebookUrl = ebookUrl;
                     });
                 });
             }

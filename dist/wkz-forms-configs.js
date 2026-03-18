@@ -125,6 +125,7 @@ WkzForms.register('frm-ebook-01', {
     successText: 'Click the button below to download your free copy.',
     gtmEvent: 'book_demo_form_submit',
     postSubmit: 'thankYou',
+    reuseSession: true,
 
     hubspot: {
         portalId: '4770265',
