@@ -440,7 +440,9 @@
         // Reset dropdowns to placeholder
         var dropdowns = inst.root.querySelectorAll('.hs-dropdown-toggle span');
         dropdowns.forEach(function (span) {
-            var select = span.closest('.hs-field-row').querySelector('select');
+            var fieldRow = span.closest('.hs-field-row');
+            if (!fieldRow) return;
+            var select = fieldRow.querySelector('select');
             if (select) {
                 select.value = '';
                 var placeholder = select.querySelector('option[value=""]');
