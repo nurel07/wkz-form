@@ -391,7 +391,7 @@
         // Update title with book name
         if (inst.ebookName) {
             var titleEl = successDiv.querySelector('.hs-success-title');
-            if (titleEl) titleEl.textContent = 'Your copy of ' + inst.ebookName + ' is ready!';
+            if (titleEl) titleEl.textContent = 'Your copy of \u201C' + inst.ebookName + '\u201D is ready!';
         }
 
         // Update text
