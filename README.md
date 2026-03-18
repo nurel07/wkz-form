@@ -72,6 +72,12 @@ The `frm-ebook-01` variant supports multiple ebooks through a single form. Each 
 
 When `data-ebook-url` is provided, the success screen shows a "Download your ebook" button linking directly to the file. If omitted, the standard thank-you message is shown instead.
 
+### Session reuse (fill form once)
+
+The ebook form has `reuseSession: true` — after the user fills the form once, all subsequent "Download" clicks in the same browser session skip the form and immediately show the download button. Each download still submits to HubSpot in the background so every ebook is tracked.
+
+The success screen dynamically shows the book title from `data-ebook-name` (e.g. "Your copy of The HVAC Success Formula is ready!").
+
 ### HubSpot email personalization setup
 
 The full book title and download link are mapped server-side in HubSpot (not exposed in frontend code):

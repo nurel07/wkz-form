@@ -30,6 +30,7 @@ dist/
 | `steps` | `1` / `2` | Multi-step ignored on mobile (<=767px) |
 | `postSubmit` | `'thankYou'` / `'revenueHero'` | revenueHero requires `revenueHeroRouter` |
 | `trigger` | CSS selector string | For modals: `'[data-action="variant-name"]'` |
+| `reuseSession` | `true` / omit | Skip form on repeat downloads in same session (ebook forms) |
 
 ## Field Types
 `text`, `email`, `tel`, `dropdown`, `industryChips`, `consent`
