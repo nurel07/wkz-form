@@ -947,6 +947,19 @@
                             }
                         }
 
+                        // Dynamic ebook download button
+                        if (inst.ebookUrl) {
+                            var existingCta = successDiv.querySelector('.hs-success-cta');
+                            if (existingCta) existingCta.remove();
+                            var dlLink = document.createElement('a');
+                            dlLink.href = inst.ebookUrl;
+                            dlLink.target = '_blank';
+                            dlLink.rel = 'noopener';
+                            dlLink.className = 'hs-success-cta';
+                            dlLink.textContent = 'Download your ebook';
+                            successDiv.appendChild(dlLink);
+                        }
+
                         successDiv.classList.add('visible');
 
                         // RevenueHero
@@ -1092,6 +1105,10 @@
                         var ebookName = e.currentTarget.getAttribute('data-ebook-name');
                         if (ebookName) {
                             instances[formId].ebookName = ebookName;
+                        }
+                        var ebookUrl = e.currentTarget.getAttribute('data-ebook-url');
+                        if (ebookUrl) {
+                            instances[formId].ebookUrl = ebookUrl;
                         }
                         openPopup(formId);
                     });

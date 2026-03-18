@@ -121,8 +121,8 @@ WkzForms.register('frm-ebook-01', {
     steps: 1,
     trigger: '[data-action="frm-ebook-01"]',
     submitText: 'Get my free copy',
-    successTitle: 'Thank you!',
-    successText: 'Your free copy is on its way. Check your email.',
+    successTitle: 'Your ebook is ready!',
+    successText: 'Click the button below to download your free copy.',
     gtmEvent: 'book_demo_form_submit',
     postSubmit: 'thankYou',
 
