@@ -1186,28 +1186,11 @@
                         var ebookName = e.currentTarget.getAttribute('data-ebook-name');
                         var ebookUrl = e.currentTarget.getAttribute('data-ebook-url');
 
-                        // Fast-path: skip form if session data exists
+                        // Fast-path: skip form if session data exists (no re-submit to HubSpot)
                         if (config.reuseSession) {
                             try {
                                 var saved = sessionStorage.getItem('wkzEbookData');
                                 if (saved) {
-                                    var savedFields = JSON.parse(saved);
-                                    if (ebookName) savedFields.push({ name: 'ebook_name', value: ebookName });
-                                    COOKIE_MAP.forEach(function (c) {
-                                        var cv = getCookie(c.cookie);
-                                        if (cv) savedFields.push({ name: c.field, value: cv });
-                                    });
-                                    // Submit to HubSpot in background
-                                    var hs = config.hubspot || {};
-                                    var apiUrl = 'https://api.hsforms.com/submissions/v3/integration/submit/' + (hs.portalId || '4770265') + '/' + (hs.formId || 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0');
-                                    var payload = { fields: savedFields, context: { pageUri: window.location.href, pageName: document.title } };
-                                    var hutk = getCookie('hubspotutk');
-                                    if (hutk) payload.context.hutk = hutk;
-                                    fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(function () {});
-                                    if (window.dataLayer) {
-                                        window.dataLayer.push({ event: config.gtmEvent || 'book_demo_form_submit', formId: hs.formId, portalId: hs.portalId });
-                                    }
-                                    // Open modal, then set ebook data (openPopup resets state)
                                     openPopup(formId);
                                     var inst = instances[formId];
                                     inst.ebookName = ebookName;
