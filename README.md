@@ -39,8 +39,9 @@ Add these to your Webflow page:
 |---|---|---|---|---|---|
 | `free-book` | inline | dark | 1 | Thank you | — |
 | `book-a-demo` | modal | light | 1 | Thank you | — |
-| `frm-ebook-01` | modal | light | 1 | Thank you | — |
+| `frm-ebook-01` | modal | light | 1 | Download ebook | — |
 | `frm-book-a-demo-modale-01` | modal | light | 2 | RevenueHero | Yes |
+| `frm-expert-consultation-01` | inline | light | 1 | Thank you | — |
 
 ## RevenueHero — Meeting Scheduler After Submit
 
@@ -57,12 +58,19 @@ If RevenueHero fails to load, the form falls back to the standard thank-you scre
 
 ## Ebook Form — Dynamic ebook_name
 
-The `frm-ebook-01` variant supports multiple ebooks through a single form. Each button passes an `ebook_name` to HubSpot via `data-ebook-name`:
+The `frm-ebook-01` variant supports multiple ebooks through a single form. Each button passes an `ebook_name` to HubSpot and an optional `ebook_url` for the post-submit download button:
 
 ```html
-<button data-action="frm-ebook-01" data-ebook-name="the-hvac-success-formula">Download</button>
-<button data-action="frm-ebook-01" data-ebook-name="scaling-your-business">Download</button>
+<button data-action="frm-ebook-01"
+        data-ebook-name="the-hvac-success-formula"
+        data-ebook-url="https://example.com/hvac-ebook.pdf">Download</button>
+
+<button data-action="frm-ebook-01"
+        data-ebook-name="scaling-your-business"
+        data-ebook-url="https://example.com/scaling-ebook.pdf">Download</button>
 ```
+
+When `data-ebook-url` is provided, the success screen shows a "Download your ebook" button linking directly to the file. If omitted, the standard thank-you message is shown instead.
 
 ### HubSpot email personalization setup
 
