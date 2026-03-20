@@ -396,6 +396,15 @@ WkzForms.register('frm-expert-consultation-01', {
             autocomplete: 'email'
         },
         {
+            type: 'tel',
+            name: 'phoneNumber',
+            hsField: 'phone',
+            label: 'Phone number',
+            required: true,
+            inputType: 'tel',
+            autocomplete: 'tel'
+        },
+        {
             type: 'text',
             name: 'businessName',
             hsField: 'company',
