@@ -371,11 +371,19 @@ WkzForms.register('frm-expert-consultation-01', {
     fields: [
         {
             type: 'text',
-            name: 'fullName',
+            name: 'ownerFirstName',
             hsField: 'firstname',
-            label: 'Name',
+            label: 'First Name',
             required: true,
-            autocomplete: 'name'
+            autocomplete: 'given-name'
+        },
+        {
+            type: 'text',
+            name: 'ownerLastName',
+            hsField: 'lastname',
+            label: 'Last Name',
+            required: true,
+            autocomplete: 'family-name'
         },
         {
             type: 'email',
