@@ -363,13 +363,10 @@ WkzForms.register('frm-expert-consultation-01', {
 
     hubspot: {
         portalId: '4770265',
-        formId: 'REPLACE_WITH_HUBSPOT_FORM_ID'
+        formId: '35398dd7-3177-4a73-923f-fda21091ebd7'
     },
 
-    hiddenFields: {
-        hs_lead_status: 'New',
-        lead_type: 'Consultation'
-    },
+    hiddenFields: {},
 
     fields: [
         {
@@ -418,7 +415,7 @@ WkzForms.register('frm-expert-consultation-01', {
             name: 'mainConcern',
             hsField: 'message',
             label: 'What\'s your main concern?',
-            required: true
+            required: false
         },
         {
             type: 'consent'
