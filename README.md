@@ -9,12 +9,12 @@ Add these to your Webflow page:
 ```html
 <!-- In <head> -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/wkz-forms.css" />
+<link rel="stylesheet" href="https://nurel07.github.io/wkz-form/dist/wkz-forms.css" />
 
 <!-- Before </body> -->
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInputWithUtils.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/wkz-forms.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/nurel07/wkz-form@latest/dist/wkz-forms-configs.js"></script>
+<script src="https://nurel07.github.io/wkz-form/dist/wkz-forms.js"></script>
+<script src="https://nurel07.github.io/wkz-form/dist/wkz-forms-configs.js"></script>
 ```
 
 ## Usage
@@ -138,11 +138,11 @@ dist/
 
 ## Updating After Changes
 
-All Webflow URLs use `@latest` — they never need to change.
+Files are served via GitHub Pages — updates go live ~1 minute after pushing.
 
 1. Push your changes to `main` (any file in `dist/`)
-2. A GitHub Action automatically creates a new version tag and purges the `@latest` CDN cache
-3. Webflow picks up the changes within seconds — no manual steps needed
+2. GitHub Pages automatically deploys the update
+3. A GitHub Action creates a version tag for history
 
 ## Local Testing
 
