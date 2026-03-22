@@ -133,12 +133,15 @@ WkzForms.register('frm-ebook-01', {
     },
 
     hiddenFields: {
+        plumbing_dealership: 'none',
+        hvac_dealership: 'none',
+        source_picklist: 'eBook',
         hs_lead_status: 'OPEN',
         lead_type: 'DEMO',
         interest: 'eBook General',
         sms_consent: 'Yes',
         gtm_initiative: 'eBook Submission (March 2026)',
-        ebook_flag: 'True'
+        ebook_flag: 'true'
     },
 
     fields: [
