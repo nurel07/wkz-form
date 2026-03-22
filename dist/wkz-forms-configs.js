@@ -129,14 +129,16 @@ WkzForms.register('frm-ebook-01', {
 
     hubspot: {
         portalId: '4770265',
-        formId: '14467c87-dadc-4770-9eda-d5f568e3eeec'
+        formId: 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0'
     },
 
     hiddenFields: {
         hs_lead_status: 'OPEN',
-        lead_type: 'Content',
+        lead_type: 'DEMO',
         interest: 'eBook General',
-        sms_consent: 'Yes'
+        sms_consent: 'Yes',
+        gtm_initiative: 'eBook Submission (March 2026)',
+        ebook_flag: 'True'
     },
 
     fields: [
@@ -359,14 +361,19 @@ WkzForms.register('frm-expert-consultation-01', {
     successTitle: 'Thank you!',
     successText: 'We\'ve received your request. An expert will reach out to you shortly.',
     gtmEvent: 'expert_consultation_form_submit',
-    postSubmit: 'thankYou',
+    postSubmit: 'revenueHero',
+    revenueHeroRouter: '5348',
 
     hubspot: {
         portalId: '4770265',
-        formId: '35398dd7-3177-4a73-923f-fda21091ebd7'
+        formId: 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0'
     },
 
-    hiddenFields: {},
+    hiddenFields: {
+        hs_lead_status: 'New',
+        lead_type: 'DEMO',
+        gtm_initiative: 'Consultation Demo (March 2026)'
+    },
 
     fields: [
         {
@@ -430,7 +437,7 @@ WkzForms.register('frm-expert-consultation-01', {
         {
             type: 'text',
             name: 'mainConcern',
-            hsField: 'message',
+            hsField: 'main_pain_points',
             label: 'What\'s your main concern?',
             required: false
         },
