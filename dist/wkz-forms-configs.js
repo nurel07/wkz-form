@@ -135,7 +135,7 @@ WkzForms.register('frm-ebook-01', {
     hiddenFields: {
         plumbing_dealership: 'none',
         hvac_dealership: 'none',
-        source_picklist: 'eBook',
+        source_picklist: 'Other',
         lead_type: 'DEMO',
         interest: 'eBook General',
         sms_consent: 'Yes',
