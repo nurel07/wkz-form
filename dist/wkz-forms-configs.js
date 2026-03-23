@@ -372,6 +372,9 @@ WkzForms.register('frm-expert-consultation-01', {
     },
 
     hiddenFields: {
+        plumbing_dealership: 'none',
+        hvac_dealership: 'none',
+        source_picklist: 'Other',
         lead_type: 'DEMO',
         gtm_initiative: 'Consultation Demo (March 2026)'
     },
