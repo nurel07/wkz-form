@@ -136,7 +136,6 @@ WkzForms.register('frm-ebook-01', {
         plumbing_dealership: 'none',
         hvac_dealership: 'none',
         source_picklist: 'eBook',
-        hs_lead_status: 'OPEN',
         lead_type: 'DEMO',
         interest: 'eBook General',
         sms_consent: 'Yes',
@@ -373,7 +372,6 @@ WkzForms.register('frm-expert-consultation-01', {
     },
 
     hiddenFields: {
-        hs_lead_status: 'New',
         lead_type: 'DEMO',
         gtm_initiative: 'Consultation Demo (March 2026)'
     },
