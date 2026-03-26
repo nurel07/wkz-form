@@ -441,7 +441,7 @@ WkzForms.register('frm-expert-consultation-01', {
         {
             type: 'text',
             name: 'mainConcern',
-            hsField: 'main_pain_points',
+            hsField: 'consultation_reason',
             label: 'What\'s your main concern?',
             required: false
         },
