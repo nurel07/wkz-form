@@ -140,7 +140,8 @@ WkzForms.register('frm-ebook-01', {
         interest: 'eBook General',
         sms_consent: 'Yes',
         gtm_initiative: 'eBook Submission (March 2026)',
-        ebook_flag: 'true'
+        ebook_flag: 'true',
+        form_id: 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0'
     },
 
     fields: [
@@ -376,7 +377,8 @@ WkzForms.register('frm-expert-consultation-01', {
         hvac_dealership: 'none',
         source_picklist: 'Other',
         lead_type: 'DEMO',
-        gtm_initiative: 'Consultation Demo (March 2026)'
+        gtm_initiative: 'Consultation Demo (March 2026)',
+        form_id: 'ca6e3f1a-2d59-444b-91df-40cd9b3f9cd0'
     },
 
     fields: [
